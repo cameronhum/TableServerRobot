@@ -89,11 +89,39 @@ void testBluetooth(){
     car.brake();
   }
 }
+
+void testMQTTSlave(){
+  if (Serial.available())
+      {
+      String receive = (String)Serial.readStringUntil('\n');
+      receive.trim();
+      Serial.println("test below");
+
+      Serial.print(receive);
+      if (receive == "f"){
+        car.forward();
+      }
+      else if (receive == "b"){
+        car.reverse();
+      }
+      else if (receive == "l"){
+        car.turn(-90);
+      }
+      else if (receive == "r"){
+        car.turn(90);
+      }
+      else if (receive == "s"){
+        car.brake();
+      }
+
+    }
+}
+
 // put your main code here, to run repeatedly:
 void loop()
 {
-  testBluetooth();
-    
+  //testBluetooth();
+  testMQTTSlave();
   //testCar();
   //testDistStop();
   //car.forward();
